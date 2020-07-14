@@ -1,4 +1,4 @@
-# Hash Map
+# Hash Map oh yea
 class HashMap:
     def __init__(self):
         self.hash_map = [None] * 40
