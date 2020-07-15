@@ -1,5 +1,7 @@
-# Hash Map oh yea
-class HashMap:
+import csv
+
+# Hash Map
+class PackagesHashMap:
     def __init__(self):
         self.hash_map = [None] * 40
 
@@ -27,31 +29,57 @@ class HashMap:
                     return key_value_pair[1]
         return None
 
+    def print_packages_list(self):
+        for hashvalue in self.hash_map:
+            for key_value_pair in hashvalue:
+                print(key_value_pair[1])
+
 
 # Package Object
 class PackageObject:
-    def __init__(self, package_id, deadline, mass, address = None):
-        self.package_id = package_id
-        self.address = address
-        self.deadline = deadline
-        self.mass = mass
-        print('package created')
-
-
-    def __str__(self):
-        return str(self.package_id) + " " + self.deadline + " " + str(self.mass)
-
-
-# Address Object
-class AddressObject:
-    def __init__(self, address, city, state, zip_code):
+    def __init__(self, package_id, address, city='', state='', zip_code='', deadline='', mass='', notes=''):
+        self.package_id = int(package_id)
         self.address = address
         self.city = city
         self.state = state
         self.zip_code = zip_code
+        self.deadline = deadline
+        self.mass = mass
+        self.notes = notes
+        self.status = 'At Hub'
+        #print('package created')
 
 
-package1 = PackageObject(1, '5pm', 5)
-hash_map = HashMap()
-print(hash_map.add_item(package1))
-print(hash_map.get_item(package1.package_id))
+    def __str__(self):
+        return str(self.package_id) + " " + self.address + " " + self.city + " " + self.state \
+               + " " + self.zip_code + " " + self.deadline + " " + self.mass + " " + self.notes \
+               + " " + self.status
+
+
+#import package info from CSV
+
+def import_packages_from_CSV():
+    packages_hash_map = PackagesHashMap()
+    with open('packages.csv', 'r') as csv_file:
+        readCSV = csv.reader(csv_file, delimiter='\t')
+        for row in readCSV:
+            package_id = row[0]
+            address = row[1]
+            city = row[2]
+            state = row[3]
+            zip = row[4]
+            deadline = row[5]
+            mass = row[6]
+            notes = row[7]
+            temp_package = PackageObject(package_id, address, city, state, zip, deadline, mass, notes)
+            packages_hash_map.add_item(temp_package)
+    return packages_hash_map
+
+
+# package1 = PackageObject(1, '5pm', 5)
+# hash_map = PackagesHashMap()
+# print(hash_map.add_item(package1))
+# print(hash_map.get_item(package1.package_id))
+
+packages_list = import_packages_from_CSV()
+packages_list.print_packages_list()
