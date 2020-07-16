@@ -2,6 +2,8 @@ import data_storage
 import sort_algorithm
 import package
 import logistics
+import timer
+import datetime
 
 
 def main():
@@ -28,3 +30,11 @@ print("Truck 1")
 sort_algorithm.choose_delivery_order(truck1)
 print("Truck 2")
 sort_algorithm.choose_delivery_order(truck2)
+
+start_time = datetime.datetime(101,1,1,8,00,00)
+
+timer.delivery_timeline(start_time, truck1)
+
+start_time2 = datetime.datetime(101,1,1,10,21,00)
+
+timer.delivery_timeline(start_time, truck2)

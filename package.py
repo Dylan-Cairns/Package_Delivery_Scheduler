@@ -4,8 +4,10 @@ import datetime
 
 class Status:
     def __init__(self, timestamp=None, message='At Hub'):
-        self.timestamp = timestamp
-        # defaultvalues =  datetime(101,1,1,00,00,00)
+        if timestamp is None:
+            self.timestamp = datetime.datetime(100, 1, 1, 0, 0, 0)
+        else:
+            self.timestamp = timestamp
         self.message = message
 
     def get_time(self):
@@ -15,7 +17,7 @@ class Status:
         return self.message
 
     def __str__(self):
-        return str(self.timestamp) + ": " + self.message
+        return str(self.timestamp.time()) + ": " + self.message
 
 
 # Package Object
