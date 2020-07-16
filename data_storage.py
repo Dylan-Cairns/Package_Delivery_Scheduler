@@ -1,5 +1,6 @@
 import csv
-
+import datetime
+import package
 
 # Hash Map
 class PackagesHashMap:
@@ -30,44 +31,30 @@ class PackagesHashMap:
                     return key_value_pair[1]
         return None
 
+    def get_package_by_address_id(self, address_id):
+        for hash_key in self.hash_map:
+            for key_value_pair in hash_key:
+                temp_package = key_value_pair[1]
+                if address_id == temp_package.get_location_id():
+                    return temp_package
+        return None
+
     def print_packages_list(self):
         for hash_key in self.hash_map:
             for key_value_pair in hash_key:
                 print(key_value_pair[1])
 
-
-# Package Object
-class PackageObject:
-    def __init__(self, package_id, address, address_id, city='', state='', zip_code='', deadline='', mass='', notes=''):
-        self.package_id = int(package_id)
-        self.address = address
-        self.address_id = address_id
-        self.city = city
-        self.state = state
-        self.zip_code = zip_code
-        self.deadline = deadline
-        self.mass = mass
-        self.notes = notes
-        self.status = 'At Hub'
-    
-    def get_package_id(self):
-        return self.package_id
-
-    def get_address_id(self):
-        return self.package_id
-
-    def get_address(self):
-        return self.address
-
-    def __str__(self):
-        return str(self.package_id) + " " + self.address + " " + str(self.address_id) + " " + self.city \
-               + " " + self.state + " " + self.zip_code + " " + self.deadline + " " + self.mass \
-               + " " + self.notes + " " + self.status
+    def get_packages_list(self):
+        packages_list = []
+        for hash_key in self.hash_map:
+            for key_value_pair in hash_key:
+                packages_list.append(key_value_pair[1])
+        return packages_list
 
 
 # import package info from CSV and store the data in a hash map. Use the location dictionary
 # class to append address IDs to each package.
-def import_packages_from_CSV():
+def import_packages_from_csv():
     location_dictionary = LocationDictionary()
     packages_hash_map = PackagesHashMap()
     with open('packages.csv', 'r') as csv_file:
@@ -83,12 +70,12 @@ def import_packages_from_CSV():
             deadline = row[5]
             mass = row[6]
             notes = row[7]
-            temp_package = PackageObject(package_id, address, address_id, city, state, zip, deadline, mass, notes)
+            temp_package = package.PackageObject(package_id, address, address_id, city, state, zip, deadline, mass, notes)
             packages_hash_map.add_item(temp_package)
     return packages_hash_map
 
 
-def import_distances_from_CSV():
+def import_distances_from_csv():
     distances_matrix = []
     with open('distances.csv', 'r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
