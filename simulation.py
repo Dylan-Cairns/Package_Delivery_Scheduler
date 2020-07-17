@@ -13,6 +13,9 @@ class Simulation:
         self.t1_distance = None
         self.t2_distance = None
         self.t2_r2_distance = None
+        self.start_time = None
+        self.start_time2 = None
+        self.start_time2_2 = None
 
     def choose_trucks(self):
         self.truck1.clear()
@@ -48,14 +51,14 @@ class Simulation:
         self.truck2_second_load = truck2_2_results[0]
         self.t2_r2_distance = truck2_2_results[1]
 
-        start_time = datetime.datetime(101, 1, 1, 8, 00, 00)
-        print("\nTruck 1 depart hub: " + str(start_time.time()))
-        self.truck1 = delivery_timeline(start_time, self.truck1)
+        self.start_time = datetime.datetime(101, 1, 1, 8, 00, 00)
+        print("\nTruck 1 depart hub: " + str(self.start_time.time()))
+        self.truck1 = delivery_timeline(self.start_time, self.truck1)
         print("Truck 1 miles: " + str(self.t1_distance))
 
-        start_time2 = datetime.datetime(101, 1, 1, 8, 00, 00)
-        print("\nTruck 2 depart hub: " + str(start_time2.time()))
-        self.truck2 = delivery_timeline(start_time2, self.truck2)
+        self.start_time2 = datetime.datetime(101, 1, 1, 8, 00, 00)
+        print("\nTruck 2 depart hub: " + str(self.start_time2.time()))
+        self.truck2 = delivery_timeline(self.start_time2, self.truck2)
 
         return_distance = sort_algorithm.check_distance(self.truck2[-1].get_location_id(), 0)
         time_to_add = (return_distance * 60) / 18
@@ -64,12 +67,17 @@ class Simulation:
         self.t2_distance += return_distance
         print("Truck 2 miles (including return to hub): " + str(self.t2_distance))
 
-        start_time3 = t2_return_time
-        print("\nTruck 2 depart hub: " + str(start_time3.time()))
-        self.truck2_second_load = delivery_timeline(start_time3, self.truck2_second_load)
+        self.start_time2_2 = t2_return_time
+        print("\nTruck 2 depart hub: " + str(self.start_time2_2.time()))
+        self.truck2_second_load = delivery_timeline(self.start_time2_2, self.truck2_second_load)
         print("Truck 2 second run miles: " + str(self.t2_r2_distance))
         self.total_distance = self.t1_distance + self.t2_distance + self.t2_r2_distance
         print("\nTotal combined miles for all deliveries: " + str(self.total_distance))
+        
+        def get_package_status(package_id, time):
+
+            
+
 
 def delivery_timeline(start_time, truckload):
     current_time = start_time
