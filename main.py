@@ -23,18 +23,26 @@ packages_list = data_storage.import_packages_from_csv()
 # sort_algorithm.choose_delivery_order(short_list)
 
 logistics = logistics.Logistics()
-logistics.load_trucks()
+logistics.choose_trucks()
 truck1 = logistics.truck1
 truck2 = logistics.truck2
+truck1_second_load = logistics.truck1_second_load
 print("Truck 1")
-sort_algorithm.choose_delivery_order(truck1)
+truck1 = sort_algorithm.choose_delivery_order(truck1)
 print("Truck 2")
-sort_algorithm.choose_delivery_order(truck2)
+truck2 = sort_algorithm.choose_delivery_order(truck2)
+print("Truck 1 load 2")
+truck1_second_load = sort_algorithm.choose_delivery_order(truck1_second_load)
 
 start_time = datetime.datetime(101,1,1,8,00,00)
-
+print("Truck 1")
 timer.delivery_timeline(start_time, truck1)
 
-start_time2 = datetime.datetime(101,1,1,10,21,00)
+start_time2 = datetime.datetime(101,1,1,8,00,00)
+print("Truck 2")
+timer.delivery_timeline(start_time2, truck2)
 
-timer.delivery_timeline(start_time, truck2)
+start_time3 = datetime.datetime(101,1,1,9,30,00)
+print("Truck 3")
+timer.delivery_timeline(start_time3, truck1_second_load)
+

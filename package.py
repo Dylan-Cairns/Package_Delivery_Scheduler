@@ -56,5 +56,5 @@ class PackageObject:
     #            + " " + self.notes + " " + str(self.status)
 
     def __str__(self):
-        return str(self.package_id) + " " + str(self.location_id) \
-               + " " + self.deadline + " " + self.notes + " " + str(self.status)
+        return "pkgID: " + str(self.package_id) + " locID " + str(self.location_id) \
+               + " DL: " + self.deadline + " Stat: " + str(self.status)

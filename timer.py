@@ -10,8 +10,8 @@ def delivery_timeline(start_time, truckload):
         distance = sort_algorithm.check_distance(current_location, item.get_location_id())
         time_to_add = (distance*60)/18
         current_time += datetime.timedelta(minutes=time_to_add)
+        current_location = item.get_location_id()
         status = package.Status(current_time, "delivered")
         item.update_status(status)
         updated_list.append(item)
-    for item in updated_list:
         print(item)
