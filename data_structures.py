@@ -115,20 +115,3 @@ class LocationDictionary:
     def print_location_dictionary(self):
         for row in self.location_dictionary:
             print('[%s]' % ', '.join(map(str, row)))
-
-
-# TESTING PACKAGE LIST
-# packages_list = import_packages_from_CSV()
-# packages_list.print_packages_list()
-
-# TESTING DISTANCES LIST
-# distances_matrix = import_distances_from_CSV()
-# for row in distances_matrix:
-#    print('[%s]' % ', '.join(map(str, row)))
-
-# TESTING LOCATION DICTIONARY
-#location_dictionary = LocationDictionary()
-#location_dictionary.print_location_dictionary()
-#print(location_dictionary.get_address(5))
-#print(packages_list.get_package(5).get_package_id)
-#print(location_dictionary.get_location_id(packages_list.get_package(5).get_package_id))
