@@ -6,6 +6,8 @@ import datetime
 
 class Simulation:
     def __init__(self):
+        self.package_hash_map = data_structures.import_packages_from_csv()
+        self.all_packages = self.package_hash_map.get_packages_list()
         self.truck1 = []
         self.truck2 = []
         self.truck2_second_load = []
@@ -21,11 +23,9 @@ class Simulation:
         self.truck1.clear()
         self.truck2.clear()
         self.truck2_second_load.clear()
-        package_hash_map = data_structures.import_packages_from_csv()
-        all_packages = package_hash_map.get_packages_list()
         truck_1_packages = [13, 14, 15, 16, 19, 20, 2, 4, 5, 7, 34]
         truck_2_packages = [3, 6, 18, 25, 28, 32, 36, 38, 1, 29, 30, 31, 37, 40]
-        for item in all_packages:
+        for item in self.all_packages:
             if item.get_package_id() == 9:
                 item.address = "410 S State St"
                 item.city = "Salt Lake City"
@@ -72,19 +72,39 @@ class Simulation:
         self.truck2_second_load = delivery_timeline(self.start_time2_2, self.truck2_second_load)
         print("Truck 2 second run miles: " + str(self.t2_r2_distance))
         self.total_distance = self.t1_distance + self.t2_distance + self.t2_r2_distance
-        print("\nTotal combined miles for all deliveries: " + str(self.total_distance))
-        
-        def get_package_status(package_id, time):
+        print("\nTotal combined miles for all deliveries: " + str(self.total_distance) + "\n\n")
 
-            
+    def get_package_status(self, package_id, check_time):
+        loading_time = None
+        temp_package = self.package_hash_map.get_package(package_id)
+        delivery_time = temp_package.get_status().get_time()
+        truck_number = None
+        #check which truck the package is on
+        if temp_package in self.truck1:
+            loading_time = self.start_time
+            truck_number = 1
+        elif temp_package in self.truck2:
+            loading_time = self.start_time2
+            truck_number = 2
+        elif temp_package in self.truck2_second_load:
+            loading_time = self.start_time2_2
+            truck_number = 2
+        if check_time > delivery_time:
+            print(temp_package)
+        elif delivery_time > check_time > loading_time:
+            print("pkgID: " + str(package_id) + " " + str(check_time.time()) + ": in route on truck number " + str(truck_number))
+        elif check_time < loading_time:
+            print("pkgID: " + str(package_id) + " " + str(check_time.time()) + ": at hub")
+
+    def get_all_packages_status(self, check_time):
+        for package in self.all_packages:
+            self.get_package_status(package.get_package_id(), check_time)
 
 
 def delivery_timeline(start_time, truckload):
     current_time = start_time
     current_location = 0
     updated_list = []
-    for item in truckload:
-        status = package.Status(current_time, "In route")
     for item in truckload:
         distance = sort_algorithm.check_distance(current_location, item.get_location_id())
         time_to_add = (distance*60)/18
