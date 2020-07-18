@@ -90,11 +90,11 @@ class Simulation:
             loading_time = self.start_time2_2
             truck_number = 2
         if check_time > delivery_time:
-            print(temp_package)
+            print("packageID: " + str(package_id) + " delivered at " + str(delivery_time.time()))
         elif delivery_time > check_time > loading_time:
-            print("pkgID: " + str(package_id) + " " + str(check_time.time()) + ": in route on truck number " + str(truck_number))
+            print("packageID: " + str(package_id) + " " + str(check_time.time()) + ": in route on truck number " + str(truck_number))
         elif check_time < loading_time:
-            print("pkgID: " + str(package_id) + " " + str(check_time.time()) + ": at hub")
+            print("packageID: " + str(package_id) + " " + str(check_time.time()) + ": at hub")
 
     def get_all_packages_status(self, check_time):
         for package in self.all_packages:
@@ -113,5 +113,6 @@ def delivery_timeline(start_time, truckload):
         status = package.Status(current_time, "delivered")
         item.update_status(status)
         updated_list.append(item)
-        print(item)
+        print("packageID: " + str(item.package_id) + " || locationID " + str(item.get_location_id())
+               + " || Deadline: " + item.deadline + " || Status: " + str(item.status))
     return updated_list

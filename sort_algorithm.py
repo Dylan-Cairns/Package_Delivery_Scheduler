@@ -28,8 +28,6 @@ def check_distance(current_location, check_location):
     distance = distances_matrix[current_location][check_location]
     if distance == '':
         distance = distances_matrix[check_location][current_location]
-    # print("current location ID: " + str(current_location) + " next location: " + str(check_location) + " distance: "
-    #       + str(distance))
     return float(distance)
 
 
