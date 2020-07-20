@@ -103,6 +103,7 @@ class Simulation:
 
     # time complexity: O(N) where N is no of packages in the hash table
     def get_all_packages_status(self, check_time):
+        print("Status for all packages at " + str(check_time.time()) + "\n")
         for package in self.all_packages:
             self.get_package_status(package.get_package_id(), check_time)
 

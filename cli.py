@@ -11,6 +11,14 @@ class CommandLineInterface:
         self.sim = simulation.Simulation()
         self.sim.run_simulation()
 
+        print("Criteria G1, G2, G3: Status for all packages at times 9am, 10am, and 1pm:\n")
+        check_time1 = datetime.datetime(101, 1, 1, 9, 0, 00)
+        self.sim.get_all_packages_status(check_time1)
+        check_time2 = datetime.datetime(101, 1, 1, 10, 0, 00)
+        self.sim.get_all_packages_status(check_time2)
+        check_time3 = datetime.datetime(101, 1, 1, 13, 0, 00)
+        self.sim.get_all_packages_status(check_time3)
+
     # Time complexity O(1)
     def menu(self):
         choice = None
