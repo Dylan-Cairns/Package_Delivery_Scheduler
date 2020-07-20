@@ -1,6 +1,6 @@
 import datetime
 
-
+# Status object class. All methods are O(1)
 class Status:
     def __init__(self, timestamp=None, message='At Hub'):
         if timestamp is None:
@@ -19,7 +19,7 @@ class Status:
         return str(self.timestamp.time()) + ": " + self.message
 
 
-# Package Object
+# Package Object class. All methods are O(1)
 class PackageObject:
     def __init__(self, package_id, address, location_id, city='', state='', zip_code='', deadline='', mass='',
                  notes=''):

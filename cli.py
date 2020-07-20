@@ -2,12 +2,14 @@ import simulation
 import datetime
 
 
+# Command line interface class. All methods are O(1)
 class CommandLineInterface:
     def __init__(self):
         print("Executing delivery simulation: \n")
         self.sim = simulation.Simulation()
         self.sim.run_simulation()
 
+    # Time complexity O(1)
     def menu(self):
         choice = None
         while choice != 4:
@@ -52,7 +54,7 @@ class CommandLineInterface:
                 print("Goodbye")
                 exit()
 
-
+# Time complexity O(1)
 def show_menu_text():
     print("Choose from the following options:\n" +
           "1. Look up a package\n" +

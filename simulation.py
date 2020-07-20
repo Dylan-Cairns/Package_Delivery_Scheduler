@@ -19,6 +19,7 @@ class Simulation:
         self.start_time2 = None
         self.start_time2_2 = None
 
+    # load packages into trucks. Time complexity: O(N) where N is no of packages in the hash table
     def choose_trucks(self):
         self.truck1.clear()
         self.truck2.clear()
@@ -39,6 +40,9 @@ class Simulation:
             else:
                 self.truck2_second_load.append(item)
 
+    # run a complete simulation. chooses which trucks to load packages onto,
+    # sorts the loads which are on the trucks, calculates a timeline based on truck speed
+    # time complexity: O(N) where N is total number of packages
     def run_simulation(self):
         self.choose_trucks()
         truck1_results = sort_algorithm.choose_delivery_order(self.truck1)
@@ -74,6 +78,7 @@ class Simulation:
         self.total_distance = self.t1_distance + self.t2_distance + self.t2_r2_distance
         print("\nTotal combined miles for all deliveries: " + str(self.total_distance) + "\n\n")
 
+    # Time complexity: O(1)
     def get_package_status(self, package_id, check_time):
         loading_time = None
         temp_package = self.package_hash_map.get_package(package_id)
@@ -96,11 +101,14 @@ class Simulation:
         elif check_time < loading_time:
             print("packageID: " + str(package_id) + " " + str(check_time.time()) + ": at hub")
 
+    # time complexity: O(N) where N is no of packages in the hash table
     def get_all_packages_status(self, check_time):
         for package in self.all_packages:
             self.get_package_status(package.get_package_id(), check_time)
 
 
+# given a list of packages, generates a timeline based on the given truck speed of 18mph.
+# time complexity: O(N) where N is no of packages in the given list.
 def delivery_timeline(start_time, truckload):
     current_time = start_time
     current_location = 0

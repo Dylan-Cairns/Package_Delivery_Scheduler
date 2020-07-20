@@ -1,14 +1,16 @@
 import csv
 import package
 
+
 # Hash Map
-class PackagesHashMap:
+class PackagesHashTable:
     def __init__(self):
         self.hash_map = [None] * 40
 
     def _get_hashkey(self, package_id):
         return (package_id - 1) % 40
 
+    # time complexity: O(1)
     def add_item(self, package_object):
         hash_key = self._get_hashkey(package_object.package_id)
         key_value_pair = [hash_key, package_object]
@@ -22,6 +24,8 @@ class PackagesHashMap:
                     return True
             self.hash_map[hash_key].append(key_value_pair)
 
+    # time complexity: O(N) where N is the no of packages w the
+    # same ID (so always O(1) for this project)
     def get_package(self, package_id):
         hash_key = self._get_hashkey(package_id)
         if self.hash_map[hash_key] is not None:
@@ -30,6 +34,8 @@ class PackagesHashMap:
                     return key_value_pair[1]
         return None
 
+    # time complexity: O(N) where N is the no of packages w the
+    # same ID (so always O(1) for this project)
     def get_package_by_address_id(self, address_id):
         for hash_key in self.hash_map:
             for key_value_pair in hash_key:
@@ -38,11 +44,15 @@ class PackagesHashMap:
                     return temp_package
         return None
 
+    # time complexity: O(N) where N is the no of hash keys
+    # in the hash table (so 40 for this project)
     def print_packages_list(self):
         for hash_key in self.hash_map:
             for key_value_pair in hash_key:
                 print(key_value_pair[1])
 
+    # time complexity: O(N) where N is the no of packages
+    # in the hash table (so 40 for this project)
     def get_packages_list(self):
         packages_list = []
         for hash_key in self.hash_map:
@@ -53,9 +63,10 @@ class PackagesHashMap:
 
 # import package info from CSV and store the data in a hash map. Use the location dictionary
 # class to append address IDs to each package.
+# time complexity: O(N) where N is the no of rows in the csv
 def import_packages_from_csv():
     location_dictionary = LocationDictionary()
-    packages_hash_map = PackagesHashMap()
+    packages_hash_map = PackagesHashTable()
     with open('packages.csv', 'r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='\t')
         for row in csv_reader:
@@ -73,7 +84,8 @@ def import_packages_from_csv():
             packages_hash_map.add_item(temp_package)
     return packages_hash_map
 
-
+# Import the distance table from the CSV
+# time complexity: O(N) where N is the no of rows in the csv
 def import_distances_from_csv():
     distances_matrix = []
     with open('distances.csv', 'r') as csv_file:
@@ -85,7 +97,8 @@ def import_distances_from_csv():
             distances_matrix.append(temp_row)
     return distances_matrix
 
-
+# Create a list which matches location IDs to an address
+# time complexity: O(N) where N is the no of rows in the csv
 class LocationDictionary:
     def __init__(self):
         self.location_dictionary = []
@@ -99,18 +112,21 @@ class LocationDictionary:
                 temp_row[2] = temp_row[2].replace('North', 'N').replace('South', 'S')
                 self.location_dictionary.append(temp_row)
 
+    # time complexity: O(N) where N is the no of entries in the dict
     def get_location_id(self, address):
         for x in range(len(self.location_dictionary)):
             if self.location_dictionary[x][2] == address:
                 return self.location_dictionary[x][0]
         return None
 
+    # time complexity: O(N) where N is the no of entries in the dict
     def get_address(self, location_id):
         for x in range(len(self.location_dictionary)):
             if self.location_dictionary[x][0] == location_id:
                 return self.location_dictionary[x][2]
         return None
 
+    # time complexity: O(N) where N is the no of entries in the dict
     def print_location_dictionary(self):
         for row in self.location_dictionary:
             print('[%s]' % ', '.join(map(str, row)))
