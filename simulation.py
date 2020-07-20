@@ -42,7 +42,7 @@ class Simulation:
 
     # run a complete simulation. chooses which trucks to load packages onto,
     # sorts the loads which are on the trucks, calculates a timeline based on truck speed
-    # time complexity: O(N) where N is total number of packages
+    # time complexity: O(N^2) where N is total number of packages
     def run_simulation(self):
         self.choose_trucks()
         truck1_results = sort_algorithm.choose_delivery_order(self.truck1)

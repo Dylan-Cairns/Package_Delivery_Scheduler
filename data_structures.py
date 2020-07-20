@@ -10,7 +10,7 @@ class PackagesHashTable:
     def _get_hashkey(self, package_id):
         return (package_id - 1) % 40
 
-    # time complexity: O(1)
+    # get a hashkey and add an item to the hash table. time complexity: O(1)
     def add_item(self, package_object):
         hash_key = self._get_hashkey(package_object.package_id)
         key_value_pair = [hash_key, package_object]

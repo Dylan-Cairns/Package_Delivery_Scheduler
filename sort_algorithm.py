@@ -1,7 +1,7 @@
 import data_structures
 
 # this method contains the algorithm which, given a list of packages,
-# chooses the order of packages for delivery. time complexity: O(N)
+# chooses the order of packages for delivery. time complexity: O(N^2)
 def choose_delivery_order(packages_list):
 
     current_location_id = 0

@@ -49,6 +49,9 @@ class PackageObject:
     def update_status(self, new_status):
         self.status = new_status
 
+    # redefine the string output for the package class.
+    # This output is used when a user requests information
+    # for a specific package
     def __str__(self):
         return "Package Id: " + str(self.package_id) + " Location Id: " + str(self.location_id) +\
                "\nAddress: " + self.address + " City:" + self.city \

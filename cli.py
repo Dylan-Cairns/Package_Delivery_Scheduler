@@ -2,10 +2,12 @@ import simulation
 import datetime
 
 
-# Command line interface class. All methods are O(1)
+# Command line interface class. This class will call the simulation class,
+# run the simulation, and then allow the user to check for status as desired.
 class CommandLineInterface:
     def __init__(self):
         print("Executing delivery simulation: \n")
+        # create an instance of the simulation class time complexity for the simulation is O(N^2)
         self.sim = simulation.Simulation()
         self.sim.run_simulation()
 
@@ -53,6 +55,7 @@ class CommandLineInterface:
             if choice == 4:
                 print("Goodbye")
                 exit()
+
 
 # Time complexity O(1)
 def show_menu_text():
