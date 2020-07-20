@@ -23,8 +23,8 @@ class Simulation:
         self.truck1.clear()
         self.truck2.clear()
         self.truck2_second_load.clear()
-        truck_1_packages = [13, 14, 15, 16, 19, 20, 2, 4, 5, 7, 34]
-        truck_2_packages = [3, 6, 18, 25, 28, 32, 36, 38, 1, 29, 30, 31, 37, 40]
+        truck_1_packages = [13, 14, 15, 16, 19, 20, 2, 4, 5, 7, 34, 31]
+        truck_2_packages = [3, 6, 18, 25, 36, 38, 1, 29, 30, 37, 40]
         for item in self.all_packages:
             if item.get_package_id() == 9:
                 item.address = "410 S State St"
@@ -56,7 +56,7 @@ class Simulation:
         self.truck1 = delivery_timeline(self.start_time, self.truck1)
         print("Truck 1 miles: " + str(self.t1_distance))
 
-        self.start_time2 = datetime.datetime(101, 1, 1, 8, 00, 00)
+        self.start_time2 = datetime.datetime(101, 1, 1, 9, 5, 00)
         print("\nTruck 2 depart hub: " + str(self.start_time2.time()))
         self.truck2 = delivery_timeline(self.start_time2, self.truck2)
 
@@ -79,7 +79,7 @@ class Simulation:
         temp_package = self.package_hash_map.get_package(package_id)
         delivery_time = temp_package.get_status().get_time()
         truck_number = None
-        #check which truck the package is on
+        # check which truck the package is on
         if temp_package in self.truck1:
             loading_time = self.start_time
             truck_number = 1

@@ -52,9 +52,10 @@ class CommandLineInterface:
                 print("Goodbye")
                 exit()
 
+
 def show_menu_text():
     print("Choose from the following options:\n" +
-        "1. Look up a package\n" +
-        "2. Look up a package status at a given time\n" +
-        "3. Get status of all packages at a given time\n" +
-        "4. Exit")
+          "1. Look up a package\n" +
+          "2. Look up a package status at a given time\n" +
+          "3. Get status of all packages at a given time\n" +
+          "4. Exit")
