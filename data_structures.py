@@ -7,7 +7,7 @@ class PackagesHashTable:
     def __init__(self):
         self.hash_map = [None] * 40
 
-    # generate a hashkey and add an item to the hash table. time complexity: O(1)
+    # generate a hashkey. time complexity: O(1)
     def _get_hashkey(self, package_id):
         return (package_id - 1) % 40
 
