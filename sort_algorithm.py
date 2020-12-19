@@ -1,5 +1,6 @@
 import data_structures
 
+
 # this method contains the algorithm which, given a list of packages,
 # chooses the order of packages for delivery. time complexity: O(N^2)
 def choose_delivery_order(packages_list):
@@ -22,6 +23,7 @@ def choose_delivery_order(packages_list):
         total_mileage += lowest_distance
         unordered_list.remove(nearest_package)
     return ordered_list, total_mileage
+
 
 # check the distance between two locations. time complexity: O(1)
 def check_distance(current_location, check_location):
